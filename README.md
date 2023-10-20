@@ -32,15 +32,6 @@ Post /reset - обнуление счета пользователя.
 
 Ниже скриншоты работы бота.
 
-![image](https://github.com/azazuent/QuizBot/assets/101038113/ceeb4f07-4c69-43a7-86f3-7266de9be143)
-
-![image](https://github.com/azazuent/QuizBot/assets/101038113/80cce56d-4d37-4104-abaf-35591c4a36cf)
-
-![image](https://github.com/azazuent/QuizBot/assets/101038113/3040f89d-c3a6-427d-bcc8-c3a8b6c43f84)
-
-![image](https://github.com/azazuent/QuizBot/assets/101038113/7cb40ad2-9363-408c-bd22-1497528dde56)
-
-![image](https://github.com/azazuent/QuizBot/assets/101038113/5c542adf-7cbe-43af-9e41-be5ce05e2019)
 
 
 <<<<<<< HEAD
