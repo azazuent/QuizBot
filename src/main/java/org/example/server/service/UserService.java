@@ -1,45 +1,44 @@
-package org.example.server.abstraction.service;
+package org.example.server.service;
 
-import org.example.server.repository.User;
+import jakarta.persistence.EntityNotFoundException;
+import org.example.server.repository.entity.Score;
+import org.example.server.repository.repo.ScoreRepo;
+import org.example.server.repository.entity.User;
+import org.example.server.repository.repo.UserRepo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-public interface UserService {
-	UserDto getById(Long id);
+@Service
+public class UserService {
 
-	Long addUser(AddUserDto addUserDto);
+	@Autowired
+	UserRepo userRepo;
 
-	UserDto signIn(SignInDto dto);
+	@Autowired
+	ScoreRepo scoreRepo;
 
-	record SignInDto(
-			Long id,
-			String password
-	){}
-
-	record AddUserDto(
-			String name,
-			String password
-	){
-		public static User toDbEntity(AddUserDto addUserDto){
-			return new User(
-					null,
-					addUserDto.name(),
-					addUserDto.password()
-			);
-		}
+	public User getById(Long id) {
+		return userRepo.findById(id)
+				.orElseThrow(() -> new EntityNotFoundException("User with id " + id + " not found"));
 	}
 
-
-	record UserDto(
-		Long id,
-		String name,
-		String password
-
-	){
-		public static UserDto fromDbEntity(User user){
-			return new UserDto(
-				user.getId(),
-				user.getName(),
-				user.getPassword()
-			);
-		}
+	public void addUser(Long id, String username) {
+		userRepo.save(new User(id, username));
 	}
+
+	public void addAnswer(Long userId, Long questionId){
+		scoreRepo.save(new Score(null, questionId, userId));
+	}
+	public Integer getScore(Long id){
+		return scoreRepo.getScoreById(id);
+	}
+
+	public Integer getScoreByTag(Long id, String tag){
+		return scoreRepo.getScoreByIdAndTag(id, tag);
+	}
+
+	public void resetScore(Long id){
+		scoreRepo.resetScoreById(id);
+	}
+
 }

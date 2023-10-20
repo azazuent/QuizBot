@@ -1,61 +1,56 @@
-package org.example.server.abstraction.service;
+package org.example.server.service;
 
-import org.example.server.repository.Question;
-import org.example.server.repository.Score;
+import jakarta.persistence.EntityNotFoundException;
+import org.example.server.repository.entity.Question;
+import org.example.server.repository.entity.QuestionTag;
+import org.example.server.repository.entity.Tag;
+import org.example.server.repository.repo.QuestionRepo;
+import org.example.server.repository.entity.Score;
+import org.example.server.repository.repo.QuestionTagRepo;
+import org.example.server.repository.repo.TagRepo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-public interface QuestionService {
+@Service
+public class QuestionService {
 
-    QuestionDto getById(Long id);
+    @Autowired
+    QuestionRepo questionRepo;
 
-    Long addQuestion(AddQuestionDto addQuestionDto);
+    @Autowired
+    TagRepo tagRepo;
 
-    String getRandomQuestion();
+    @Autowired
+    QuestionTagRepo questionTagRepo;
 
-    String getAnswerByQuestion(String question);
 
-    String getRandomQuestionByTag(String tag);
-
-    record QuestionDto(
-            Long id,
-            String question,
-            String answer
-    ){
-        public static QuestionDto fromDbEntity(Question question){
-            return new QuestionDto(
-                    question.getId(),
-                    question.getQuestion(),
-                    question.getAnswer());
-        }
+    public Question getRandomQuestion() {
+        return questionRepo.getRandomQuestion();
     }
 
-    record AddQuestionDto(
-            String question,
-            String answer
-    ){
-        public static Question toDbEntity(AddQuestionDto addQuestionDto){
-            return new Question(
-                    null,
-                    addQuestionDto.question,
-                    addQuestionDto.answer
-            );
-        }
+    public Question getRandomQuestionByTag(String tag) {
+        return questionRepo.getRandomQuestionByTag(tag);
     }
 
-    record AnswerQuestionDto(
-            Long questionId,
-            String answer
-    ){ }
-
-    record AddScoreDto(
-            Long questionId,
-            Long userId
-    ) {
-        public static Score toDbEntity(AddScoreDto addScoreDto) {
-            return new Score(
-                    null,
-                    addScoreDto.questionId(),
-                    addScoreDto.userId()
-            );
-        }
+    public void addQuestion(Question question){
+        questionRepo.save(question);
     }
+
+    public void addTag(Tag tag){
+        tagRepo.save(tag);
+    }
+
+    public void bindTag(String tag, String question){
+        Long tagId = tagRepo.getTagId(tag);
+        System.out.println(tagId);
+        if (tagId == null){
+            tagRepo.save(new Tag(null, tag));
+        }
+        QuestionTag questionTag = new QuestionTag(0L,
+                questionRepo.getQuestionId(question),
+                tagRepo.getTagId(tag));
+        questionTagRepo.save(questionTag);
+    }
+
+
 }

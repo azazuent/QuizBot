@@ -1,4 +1,4 @@
-package org.example.server.repository;
+package org.example.server.repository.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,38 +12,27 @@ public class User {
 
     public User(){}
 
-    public User(Long id, String name, String password) {
+    public User(Long id, String username) {
         this.id = id;
-        this.name = name;
-        this.password = password;
+        this.username = username;
     }
 
-
-    private String name;
-
-    private String password;
+    private String username;
 
     public Long getId() {
         return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setUsername(String username) {
+        this.username = username;
     }
+
 }
