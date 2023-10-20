@@ -33,12 +33,19 @@ Post /reset - обнуление счета пользователя.
 Ниже скриншоты работы бота.
 
 
-
-<<<<<<< HEAD
 Полоумный код и рефакторинг, пока не удалось реализовать получение вопроса или счета сразу по нескольким тегам, но корректно работает привязка нескольких тегов к одному вопросу и все с этим связанное. Также, привязывать теги к вопросам нужно поочередно и отдельными запросами.
 Есть над чем работать, было интересно.
 
-![Alt text](image.png)
-![Alt text](image-1.png)
-=======
->>>>>>> 9a33549f676e31a08a7795c981854dc43214369d
+![image](https://github.com/azazuent/QuizBot/assets/101038113/d3676f26-a6a2-48fa-ab4c-2a6ab4829d46)
+
+![image](https://github.com/azazuent/QuizBot/assets/101038113/5dcc0224-afa6-4d65-bc87-028e5f4d2adb)
+
+![image](https://github.com/azazuent/QuizBot/assets/101038113/9e9586b1-d741-4de0-addd-3a1b2e8c5313)
+
+![image](https://github.com/azazuent/QuizBot/assets/101038113/112a4843-30e4-4c3f-86cb-8cd8df6e0fb8)
+
+![image](https://github.com/azazuent/QuizBot/assets/101038113/fb5d7070-7645-4a5f-960d-c6eeb6b76f26)
+
+
+
+
