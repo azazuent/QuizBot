@@ -10,24 +10,18 @@ public interface UserService {
 	UserDto signIn(SignInDto dto);
 
 	record SignInDto(
-			String login,
+			Long id,
 			String password
 	){}
 
 	record AddUserDto(
 			String name,
-			String surname,
-
-			String login,
-
 			String password
 	){
 		public static User toDbEntity(AddUserDto addUserDto){
 			return new User(
 					null,
 					addUserDto.name(),
-					addUserDto.surname(),
-					addUserDto.login(),
 					addUserDto.password()
 			);
 		}
@@ -37,8 +31,6 @@ public interface UserService {
 	record UserDto(
 		Long id,
 		String name,
-		String surname,
-		String login,
 		String password
 
 	){
@@ -46,8 +38,6 @@ public interface UserService {
 			return new UserDto(
 				user.getId(),
 				user.getName(),
-				user.getSurname(),
-				user.getLogin(),
 				user.getPassword()
 			);
 		}
