@@ -93,8 +93,10 @@ public class QuizBot extends TelegramLongPollingBot {
         var message = update.getMessage().getText();
         var chatId = update.getMessage().getChatId();
 
-        if (message.equals(YO))
+        if (message.equals(YO)) {
             sendMessage(chatId, "ЙООО это же секретная команда!!!");
+            return;
+        }
 
         String command = new String();
         String adata = new String();
@@ -182,12 +184,20 @@ public class QuizBot extends TelegramLongPollingBot {
 
     private void getRandomQuestion(Long chatId){
         Question question = questionService.getRandomQuestion();
+        if (question == null){
+            sendMessage(chatId, "Couldn`t find a question for you. Sowwy.");
+            return;
+        }
         questions.put(chatId, question);
         sendMessage(chatId, question.getQuestion());
     }
 
     private void getRandomQuestionByTag(Long chatId, String tag){
         Question question = questionService.getRandomQuestionByTag(tag);
+        if (question == null){
+            sendMessage(chatId, "Couldn`t find a question tagged with " + tag + " for you. Sowwy.");
+            return;
+        }
         questions.put(chatId, question);
         sendMessage(chatId, question.getQuestion());
     }
